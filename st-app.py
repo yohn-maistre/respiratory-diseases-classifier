@@ -57,3 +57,4 @@ if uploaded_file is not None:
         st.title('Prediksi: ')
         st.subheader(f'**{clabels_idn[c_pred]}**')
         st.subheader(f'*{clabels[c_pred]}*')
+        st.markdown('Made with ❤️ and Streamlit by *Yohn Maistre*')
