@@ -15,11 +15,16 @@ import seaborn as sns
 
 #import pdb
 
-st.title('Prediksi Penyakit Pernapasan')
+st.title('Prediksi Penyakit Saluran Pernapasan')
 st.markdown('*Made with ❤️ by Yose Marthin Giyay*')
-st.write('**Model AI dilatih menggunakan data dengan 6 kategori diagnosis:**')
+st.subheader('**Terdapat 6 kategori diagnosis:**')
 st.markdown('*-Sehat*   \n*-Bronkiektasis*   \n*-Bronkiolitis*   \n*-Penyakit Paru Obstruktif Kronis (PPOK)*   \n*-Pneumonia*   \n*-Infeksi Saluran Pernapasan Atas*')
+st.subheader('Konteks Model AI dan Database')
+st.write('Model yang digunakan merupakan Convolutional Neural Network (CNN) yang dilatih menggunakan **TensorFlow 2.11.0**. Model ini dilatih dengan data dari **Respiratory Sound Database** yang dikemas 2 tim peneliti di Portugal dan Yunani atas nama *International Conference on Biomedical Health Informatics* (ICHBI)')
+st.markdown('Di sini _library_ **Librosa** digunakan untuk ekstraksi MFCCs dari fail audio. MFCC, atau Mel-Frequency Cepstral Coefficients, merupakan format representasi audio. Dengan proses matematis ini, fitur-fitur penting di frekuensi alami telinga manusia dapat diekstraksi dari fail audio dan dijadikan *input* ke model CNN untuk diprediksi.')
+st.markdown('Jurnal ilmiah menyangkut database yang digunakan dapat dilihat di sini: https://link.springer.com/chapter/10.1007/978-981-10-7419-6_6')
 
+st.title('Unggah fail audio dan mulai prediksi')
 # Define function to predict
 def predict_disease(model, features):
     # Predict
