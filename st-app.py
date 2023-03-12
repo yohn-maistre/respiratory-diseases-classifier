@@ -22,7 +22,7 @@ with st.expander('**Konteks Model AI dan Database**'):
     st.caption('Ini merupakan laman *interface* untuk model Convolutional Neural Network (CNN) yang dilatih menggunakan **TensorFlow 2.11.0**. Model ini dilatih dengan data dari **Respiratory Sound Database** yang dikemas 2 tim peneliti di Portugal dan Yunani atas nama *International Conference on Biomedical Health Informatics* (ICHBI)')
     st.caption('Di sini _library_ **Librosa** digunakan untuk ekstraksi MFCCs dari fail audio. MFCC, atau Mel-Frequency Cepstral Coefficients, merupakan format representasi audio. Dengan proses matematis ini, fitur-fitur penting di frekuensi alami telinga manusia dapat diekstraksi dari fail audio dan dijadikan *input* ke model CNN untuk proses pelatihan model/prediksi.')
     st.caption('Database yang digunakan dapat dijelajah dan/atau diunduh di sini: https://bhichallenge.med.auth.gr/')
-    st.caption('Jurnal ilmiah menyangkut database dapat dilihat di sini: https://link.springer.com/chapter/10.1007/978-981-10-7419-6_6')
+    st.caption('Jurnal ilmiah menyangkut pengumpulan data oleh tim dapat dilihat di sini: https://link.springer.com/chapter/10.1007/978-981-10-7419-6_6')
 
 st.subheader('**Kategori diagnosis:**')
 st.markdown('*- Sehat*   \n*- Bronkiektasis*   \n*- Bronkiolitis*   \n*- Penyakit Paru Obstruktif Kronis (PPOK)*   \n*- Pneumonia*   \n*- Infeksi Saluran Pernapasan Atas*')
