@@ -10,13 +10,15 @@ import librosa
 import librosa.display
 import seaborn as sns
 
+#import sounddevice as sd
+#from scipy.io.wavfile import write
+
 #import pdb
 
 st.title('Prediksi Penyakit Pernapasan')
+st.markdown('*Made with ❤️ by Yohn Maistre*')
 st.write('**Model AI dilatih menggunakan data dengan 6 kategori diagnosis:**')
 st.markdown('*-Sehat*   \n*-Bronkiektasis*   \n*-Bronkiolitis*   \n*-Penyakit Paru Obstruktif Kronis (PPOK)*   \n*-Pneumonia*   \n*-Infeksi Saluran Pernapasan Atas*')
-
-uploaded_file = st.file_uploader("Pilih fail audio (hanya format .WAV)")
 
 # Define function to predict
 def predict_disease(model, features):
@@ -25,6 +27,8 @@ def predict_disease(model, features):
     c_pred = np.argmax(prediction)
     
     return c_pred
+
+uploaded_file = st.file_uploader("Pilih fail audio (hanya format .WAV)")
 
 # Process uploaded Audio
 if uploaded_file is not None:
@@ -57,5 +61,3 @@ if uploaded_file is not None:
         st.title('Prediksi: ')
         st.subheader(f'**{clabels_idn[c_pred]}**')
         st.subheader(f'*{clabels[c_pred]}*')
-
-st.markdown('*Made with ❤️ Yohn Maistre*')
