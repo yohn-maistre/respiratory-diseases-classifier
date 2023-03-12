@@ -10,6 +10,8 @@ import librosa
 import librosa.display
 import seaborn as sns
 
+import pdb
+
 st.title('Prediksi Penyakit Pernapasan')
 st.write('**Model AI dilatih menggunakan data dengan 6 kategori diagnosis:**')
 st.markdown('*-Sehat*   \n*-Bronkiektasis*   \n*-Bronkiolitis*   \n*-Penyakit Paru Obstruktif Kronis (PPOK)*   \n*-Pneumonia*   \n*-Infeksi Saluran Pernapasan Atas*')
@@ -17,12 +19,12 @@ st.markdown('*-Sehat*   \n*-Bronkiektasis*   \n*-Bronkiolitis*   \n*-Penyakit Pa
 uploaded_file = st.file_uploader("Pilih fail audio (hanya format .WAV)")
 
 # Define function to predict
-def predict_disease(model, mfccs):
+def predict_disease(model, features):
     # Define trained label
     
 
     # Predict
-    prediction = model.predict(mfccs)
+    prediction = model.predict(features)
     c_pred = np.argmax(prediction)
     
     return c_pred
@@ -30,8 +32,7 @@ def predict_disease(model, mfccs):
 # Process uploaded Audio
 if uploaded_file is not None:
     # Load audio file
-    audio, sample_rate = librosa.load(uploaded_file, duration=20)
-    
+    audio, sample_rate = librosa.load(uploaded_file, res_type='kaiser_fast', duration=20)
     # Display waveform
     #if st.checkbox('Display Waveform'):
     #st.write('Waveform')
@@ -56,7 +57,13 @@ if uploaded_file is not None:
     # Extract MFCC features from audio clip & 
     mfccs = librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40)
     # Add dimensions, (20, 862) to (1, 40, 862, 1)
-    mfccs = np.expand_dims(mfccs, axis=(0, -1))
+    ######mfccs = np.expand_dims(mfccs, axis=(0, -1))
+    max_pad_len = 862
+    pad_width = max_pad_len - mfccs.shape[1]
+    mfccs = np.pad(mfccs, pad_width=((0, 0), (0, pad_width)), mode='constant')
+    features = np.array(mfccs)
+    pdb.set_trace()
+
 
     if st.button('Prediksi kemungkinan penyakit'):
         c_pred = predict_disease(model, mfccs)
