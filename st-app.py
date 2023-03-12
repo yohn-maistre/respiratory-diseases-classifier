@@ -25,6 +25,8 @@ st.subheader('**Terdapat 6 kategori diagnosis:**')
 st.markdown('*- Sehat*   \n*- Bronkiektasis*   \n*- Bronkiolitis*   \n*- Penyakit Paru Obstruktif Kronis (PPOK)*   \n*- Pneumonia*   \n*- Infeksi Saluran Pernapasan Atas*')
 
 st.subheader('Unggah fail audio dan mulai prediksi')
+st.caption('*Dalam pengembangan: rekam langsung*. **Untuk sekarang, unggah fail audio 20 detik**.')
+st.caption('Untuk rekam audio dengan format WAVE (.wav) di HP (jika tidak didukung), gunakan aplikasi seperti AudioLab; *record* dengan pilihan settings *Audio format: WAVE*, dan klik *Browse files* di laman ini untuk unggah.')
 # Define function to predict
 def predict_disease(model, features):
     # Predict
