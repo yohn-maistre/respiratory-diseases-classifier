@@ -19,15 +19,16 @@ st.title('Prediksi Penyakit Saluran Pernapasan')
 with st.expander('**Konteks Model AI dan Database**'):
     #st.markdown('**Konteks Model AI dan Database:**')
     st.caption('*Made with ❤️  by Yose Marthin Giyay*')
-    st.caption('Ini merupakan laman *interface* untuk model Convolutional Neural Network (CNN) yang dilatih menggunakan **TensorFlow 2.11.0**. Model ini dilatih dengan data dari **Respiratory Sound Database** yang dikemas 2 tim peneliti di Portugal dan Yunani atas nama *International Conference on Biomedical Health Informatics* (ICHBI)')
-    st.caption('Di sini _library_ **Librosa** digunakan untuk ekstraksi MFCCs dari fail audio. MFCC, atau Mel-Frequency Cepstral Coefficients, merupakan format representasi audio. Dengan proses matematis ini, fitur-fitur penting di frekuensi alami telinga manusia dapat diekstraksi dari fail audio dan dijadikan *input* ke model CNN untuk proses pelatihan model/prediksi.')
+    st.caption('Ini merupakan laman *interface* untuk model Convolutional Neural Network (CNN) yang dilatih menggunakan **TensorFlow 2.11.0**. Model ini dilatih dengan data dari **Respiratory Sound Database** yang dikemas 2 tim peneliti dengan subset populasi pasien di Portugal dan Yunani atas nama *International Conference on Biomedical Health Informatics* (ICHBI)')
+    st.caption('Di sini _library_ **Librosa** digunakan untuk mengekstraksi MFCCs dari *file* audio. MFCC (*Mel-Frequency Cepstral Coefficients*) merupakan format representasi audio. Dengan proses matematis ini, fitur-fitur penting di jangkauan frekuensi alami telinga manusia dapat diekstraksi dari *file* audio dan dijadikan *input* ke model CNN untuk proses pelatihan model/prediksi.')
     st.caption('Database yang digunakan dapat dijelajah dan/atau diunduh di sini: https://bhichallenge.med.auth.gr/')
     st.caption('Jurnal ilmiah menyangkut pengumpulan data oleh tim dapat dilihat di sini: https://link.springer.com/chapter/10.1007/978-981-10-7419-6_6')
+    st.caption('Project roadmap: developing a low-cost wireless stethoscope')
 
 st.subheader('**Kategori diagnosis:**')
 st.markdown('*- Sehat*   \n*- Bronkiektasis*   \n*- Bronkiolitis*   \n*- Penyakit Paru Obstruktif Kronis (PPOK)*   \n*- Pneumonia*   \n*- Infeksi Saluran Pernapasan Atas*')
-st.subheader('Unggah fail audio dan mulai prediksi')
-st.caption('*Dalam pengembangan: rekam langsung*. **Untuk sekarang, silakan unggah fail audio .wav berdurasi ~20 detik**.')
+st.subheader('Unggah *file* audio dan mulai prediksi')
+st.caption('*Dalam pengembangan: rekam langsung*. **Untuk sekarang, silakan unggah *fail* audio .wav berdurasi ~20 detik**.')
 
 # Define function to predict
 def predict_disease(model, features):
@@ -37,7 +38,7 @@ def predict_disease(model, features):
     
     return prediction, c_pred
 
-uploaded_file = st.file_uploader("Pilih fail audio (hanya format .WAV)")
+uploaded_file = st.file_uploader("Pilih *file* audio (hanya format .WAV)")
 
 # Process uploaded Audio
 if uploaded_file is not None:
@@ -45,7 +46,7 @@ if uploaded_file is not None:
     audio, sample_rate = librosa.load(uploaded_file, duration=20)
     
     # Display spectrogram
-    st.write('Spectrogram')
+    st.write('Mel Spectrogram')
     fig, ax = plt.subplots()
     sns.heatmap(librosa.power_to_db(librosa.feature.melspectrogram(y=audio, sr=sample_rate), ref=np.max))
     st.pyplot(fig)
