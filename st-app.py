@@ -16,7 +16,7 @@ import seaborn as sns
 #import pdb
 
 st.title('Prediksi Penyakit Pernapasan')
-st.markdown('*Made with ❤️ by Yohn Maistre*')
+st.markdown('*Made with ❤️ by Yose Marthin Giyay*')
 st.write('**Model AI dilatih menggunakan data dengan 6 kategori diagnosis:**')
 st.markdown('*-Sehat*   \n*-Bronkiektasis*   \n*-Bronkiolitis*   \n*-Penyakit Paru Obstruktif Kronis (PPOK)*   \n*-Pneumonia*   \n*-Infeksi Saluran Pernapasan Atas*')
 
@@ -26,7 +26,7 @@ def predict_disease(model, features):
     prediction = model.predict(features)
     c_pred = np.argmax(prediction)
     
-    return c_pred
+    return prediction, c_pred
 
 uploaded_file = st.file_uploader("Pilih fail audio (hanya format .WAV)")
 
@@ -57,7 +57,9 @@ if uploaded_file is not None:
     features = np.expand_dims(np.array(mfccs), axis=(0, -1))
 
     if st.button('Prediksi kemungkinan penyakit'):
-        c_pred = predict_disease(model, features)
+        prediction, c_pred = predict_disease(model, features)
+        max_value = np.max(prediction)
+        formatted_max = np.format_float_positional(max_value*100, precision=2)
         st.title('Prediksi: ')
-        st.subheader(f'**{clabels_idn[c_pred]}**')
+        st.subheader(f'**{clabels_idn[c_pred]}**: {formatted_max}%')
         st.subheader(f'*{clabels[c_pred]}*')
