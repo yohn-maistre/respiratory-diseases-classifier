@@ -28,9 +28,10 @@ with st.expander('**Konteks Model AI dan Database**'):
 st.subheader('**Kategori diagnosis:**')
 st.markdown('*- Sehat*   \n*- Bronkiektasis*   \n*- Bronkiolitis*   \n*- Penyakit Paru Obstruktif Kronis (PPOK)*   \n*- Pneumonia*   \n*- Infeksi Saluran Pernapasan Atas*')
 st.subheader('Unggah *file* audio dan mulai prediksi')
-st.caption('*Dalam pengembangan: rekam langsung*. **Untuk sekarang, silakan unggah *fail* audio .wav berdurasi ~20 detik**.')
+st.caption('*Dalam pengembangan: rekam langsung di laman ini*. Idealnya audio yang digunakan direkam dengan stetoskop di area trakea, bisa gunakan mata stetoskop yang disambung dengan **mic** headset Bluetooth. Untuk sekarang, bisa coba fitur **interface** dulu dengan rekaman pernapasan langsung dari mic HP.')
+st.caption('**Silakan unggah *fail* audio .wav berdurasi ~20 detik**')
 
-# Define function to predict
+# Definisikan Function untuk prediksi
 def predict_disease(model, features):
     # Predict
     prediction = model.predict(features)
@@ -40,27 +41,27 @@ def predict_disease(model, features):
 
 uploaded_file = st.file_uploader("Pilih *file* audio (hanya format .WAV)")
 
-# Process uploaded Audio
+# Proses audio yang diunggah, ekstraksi MFCCs
 if uploaded_file is not None:
-    # Load audio file
+    # Memuat berkas audio
     audio, sample_rate = librosa.load(uploaded_file, duration=20)
     
-    # Display spectrogram
+    # Tampilkan Spektogram Mel
     st.write('Mel Spectrogram')
     fig, ax = plt.subplots()
     sns.heatmap(librosa.power_to_db(librosa.feature.melspectrogram(y=audio, sr=sample_rate), ref=np.max))
     st.pyplot(fig)
 
-    # Load model
+    # Muat model yang di latih
     model = load_model('./model/CNN-MFCC.h5')
 
-    # Labels
+    # Label
     clabels = ['Bronchiectasis', 'Bronchiolitis', 'Chronic Obstructive Pulmonary Disease (COPD)', 'Healthy', 'Pneumonia', 'Upper Respiratory Tract Infection (URTI)']
     clabels_idn = ['Bronkiektasis', 'Bronkiolitis', 'Penyakit Paru Obstruktif Kronis (PPOK)', 'Sehat', 'Radang Paru-Paru', 'Infeksi Saluran Pernapasan Atas']
     
-    # Extract MFCC features from audio clip & 
+    # Ekstraksi MFCCs
     mfccs = librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40)
-    # Add dimensions, (20, 862) to (1, 40, 862, 1)
+    # Padding dimensi, dari (20, 862) ke (1, 40, 862, 1)
     max_pad_len = 862
     pad_width = max_pad_len - mfccs.shape[1]
     mfccs = np.pad(mfccs, pad_width=((0, 0), (0, pad_width)), mode='constant')
