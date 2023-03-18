@@ -28,7 +28,7 @@ with st.expander('**Konteks Model AI dan Database**'):
 st.subheader('**Kategori diagnosis:**')
 st.markdown('*- Sehat*   \n*- Bronkiektasis*   \n*- Bronkiolitis*   \n*- Penyakit Paru Obstruktif Kronis (PPOK)*   \n*- Pneumonia*   \n*- Infeksi Saluran Pernapasan Atas*')
 st.subheader('Unggah *file* audio dan mulai prediksi')
-st.caption('*Dalam pengembangan: rekam langsung di laman ini*. Idealnya audio yang digunakan direkam dengan stetoskop di area trakea, bisa gunakan mata stetoskop yang disambung dengan **mic** headset Bluetooth. Untuk sekarang, bisa coba fitur **interface** dulu dengan rekaman pernapasan langsung dari mic HP.')
+st.caption('*Dalam pengembangan: rekam langsung di laman ini*. Idealnya audio yang digunakan direkam dengan stetoskop di area trakea, bisa gunakan mata stetoskop yang disambung dengan *mic* headset Bluetooth, misalnya. Untuk sekarang, bisa coba fitur *interface* dulu dengan rekaman pernapasan langsung dari mic HP.')
 st.caption('**Silakan unggah *fail* audio .wav berdurasi ~20 detik**')
 
 # Definisikan Function untuk prediksi
